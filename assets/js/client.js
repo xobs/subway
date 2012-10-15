@@ -320,13 +320,13 @@ $(function() {
         message_html = ich.action({
           user: message.user,
           content: message.message.substr(8),
-          renderedTime: utils.formatDate(message.date)
+          renderedTime: utils.formatDate(message.date, "h:mm")
         }, true);
       } else {
         message_html = ich.message({
           user: message.user,
           content: message.message,
-          renderedTime: utils.formatDate(message.date)
+          renderedTime: utils.formatDate(message.date, "h:mm")
         }, true);
       }
 

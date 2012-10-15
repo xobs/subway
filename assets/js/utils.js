@@ -17,8 +17,8 @@ window.utils = {
     m = m < 10 ? "0" + m:m;
     s = s < 10 ? "0" + s:s;
 
-    var replacement = h + ":" + m + " " + dd;
-    return d.toDateString() + ', ' + replacement;
+    var replacement = h + ":" + m;
+    return replacement;
   },
 
   // Find and link URLs

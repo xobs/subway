@@ -16,7 +16,7 @@ var MessageView = Backbone.View.extend({
       html = ich.action({
         user: nick,
         content: this.model.get('text').substr(8),
-        renderedTime: utils.formatDate(Date.now())
+        renderedTime: utils.formatDate(Date.now(), "h:mm")
       }, true);
       html = this.model.parse(html);
     } else {
@@ -24,7 +24,7 @@ var MessageView = Backbone.View.extend({
         user: nick,
         type: this.model.get('type'),
         content: this.model.get('text'),
-        renderedTime: utils.formatDate(Date.now())
+        renderedTime: utils.formatDate(Date.now(), "h:mm")
       }, true);
       html = this.model.parse(html);
     }
