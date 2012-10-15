@@ -32,8 +32,7 @@ html { overflow: hidden; }
 }
 .container-fluid > .content {
     min-height: 100%;
-    width: 85%;
-    margin-left: 15%;
+    width: 100%;
     position: absolute;
     background: whiteSmoke;
 }
@@ -240,9 +239,9 @@ html { overflow: hidden; }
 /* Here are the styles for the chat window */
 
 #chat-window  {
-  min-height: 100%;
-  height: 100%;
-  width: 80%;
+  min-height: 420px;
+  height: 420px;
+  width: 220px;
   position: absolute;
   box-sizing: border-box;
   -moz-box-sizing: border-box; /* for Mozilla */
@@ -393,7 +392,7 @@ html { overflow: hidden; }
 
 .chat_action {
   display: table-cell;
-  width: 80%;
+  width: 290px;
   padding: 1% 0% 1% 2%;
   border-right: 1px solid #DDDDDD;
 }
@@ -409,9 +408,9 @@ html { overflow: hidden; }
 
 #user-window {
   height: 100%;
-  width: 20%;
+  width: 70px;
   position: absolute;
-  margin-left: 80%;
+  margin-left: 220px;
   background: #E7E9ED;
 }
 
