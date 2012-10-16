@@ -1,6 +1,7 @@
 var OverviewView = Backbone.View.extend({
   initialize: function() {
-    this.render();
+    //console.log("connectOnLoad()");
+    //this.connectOnLoad();
   },
 
   events: {
@@ -13,6 +14,26 @@ var OverviewView = Backbone.View.extend({
   },
 
   el: '.content',
+
+  connectAsUser: function(username, server) {
+      var connectInfo = {
+        nick: username,
+        server: server?server:"xoblo.gs",
+        port: 6667,
+        secure: false,
+        selfSigned: false,
+        rejoin: true,
+        away: false,
+        realName: username,
+        password: "",
+        encoding: "ISO-8859-1",
+        keepAlive: true
+      };
+
+      irc.me = new User(connectInfo);
+      //irc.me.on('change:nick', irc.appView.renderUserBox);
+      irc.socket.emit('connect', connectInfo);
+  },
 
   render: function(event) {
     $(this.el).html(ich.overview());
