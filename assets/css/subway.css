@@ -8,7 +8,7 @@ html { overflow: hidden; }
   position: absolute;
   zoom: 1;
   padding: 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .container-fluid:before, .container-fluid:after {
   display: table;
@@ -256,8 +256,8 @@ html { overflow: hidden; }
 #chat-bar, #user-bar{
   top: 0;
   height: 34px;
-  background: #434950;
-  color: #eee;
+  background: #553886;
+  color: #fff;
   overflow: hidden;
 }
 
@@ -274,7 +274,7 @@ html { overflow: hidden; }
 }
 
 .titlebar #topic{
-  color: #CCCCCC;
+  color: #fff;
   white-space: nowrap;
 }
 
@@ -284,7 +284,7 @@ html { overflow: hidden; }
   bottom: 57px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: whiteSmoke;
+  background: white;
   border-right: 1px solid #DDDDDD
 }
 
@@ -306,10 +306,11 @@ html { overflow: hidden; }
   margin-right: 2%;
   float: left;
   margin-left: 2%;
+  margin-bottom: 4px;
 }
 
 #input-container .input a{
-  font-size: 1.3em;
+  font-size: 14px;
 }
 
 .spacing-right {
@@ -323,7 +324,7 @@ html { overflow: hidden; }
 }
 
 .message-me {
-  background: #EBF0FA;
+  background: #e9d8f1;
 }
 
 .message_notification{
