@@ -241,7 +241,7 @@ html { overflow: hidden; }
 #chat-window  {
   min-height: 420px;
   height: 420px;
-  width: 220px;
+  width: 290px;
   position: absolute;
   box-sizing: border-box;
   -moz-box-sizing: border-box; /* for Mozilla */
@@ -302,7 +302,7 @@ html { overflow: hidden; }
 }
 
 #input-container .input input{
-  width: 83%;
+  width: 270px;
   margin-right: 2%;
   float: left;
   margin-left: 2%;
@@ -410,7 +410,7 @@ html { overflow: hidden; }
   height: 100%;
   width: 70px;
   position: absolute;
-  margin-left: 220px;
+  margin-left: 290px;
   background: #E7E9ED;
 }
 
