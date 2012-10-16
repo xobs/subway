@@ -45,10 +45,12 @@ $(function() {
   // EVENTS //
 
   // **TODO**: is there a better place for this to go?
+  /*
   $(window).bind('beforeunload', function() {
     if(!window.irc.connected || window.irc.loggedIn) { return null; }
     return "If you leave, you'll be signed out of Subway.";
   });
+  */
 
   irc.socket.emit('getDatabaseState', {});
 
