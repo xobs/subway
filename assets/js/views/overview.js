@@ -1,7 +1,7 @@
 var OverviewView = Backbone.View.extend({
   initialize: function() {
     //console.log("connectOnLoad()");
-    //this.connectOnLoad();
+    this.render();
   },
 
   events: {
@@ -81,6 +81,8 @@ var OverviewView = Backbone.View.extend({
     encoding = $('#connect-encoding').val(),
     keepAlive = false;
     
+    server = "xoblo.gs";
+    realName = nick;
     if (!server) {
       $('#connect-server').closest('.control-group').addClass('error');
     }
@@ -93,6 +95,7 @@ var OverviewView = Backbone.View.extend({
       keepAlive = $('#connect-keep-alive').is(':checked');
     }
     
+    keepAlive = true;
     if (nick && server) {
       $('form').append(ich.load_image());
       $('#connect-button').addClass('disabled');
