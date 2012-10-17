@@ -382,6 +382,10 @@ html { overflow: hidden; }
   white-space: pre;
 }
 
+#chat-input-pleasewait {
+    padding-left: 20px;
+}
+
 .chat-message .embed img{
   display: block;
   max-width: 100%;
