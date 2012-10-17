@@ -26,9 +26,14 @@ var WindowList = Backbone.Collection.extend({
   },
 
   getActive: function() {
-    return this.find(function(chat) {
-      return chat.get('active') === true;
+    potential = this.find(function(chat) {
+      return chat.get('active') === true && chat.get('name') !== 'status';
     });
+    if (!potential
+     && this.getByName('status')
+     && this.getByName('status').get('active') === true)
+      potential = this.getByName('status');
+    return potential;
   },
 
   setActive: function(selected) {
