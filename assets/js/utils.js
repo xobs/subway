@@ -41,20 +41,6 @@ window.utils = {
       //Look for embeddable media in all the links
       for (var i=0; i<links.length; i++){
         var href = links[i];
-        //Add embedded youtube video
-        if (href.search('http://www.youtube.com') > -1) {
-          var video_id = href.split('v=')[1];
-          var targetPosition = video_id.indexOf('&');
-          if(targetPosition !== -1) {
-            video_id = video_id.substring(0, targetPosition);
-          }
-          parsed = parsed.split('</div><div class=\"chat-time\">').join(ich.youtube_embed({video_id:video_id}, true) + '</div><div class=\"chat-time\">');
-        }
-
-        //Add embedded images
-        if (jQuery.inArray(href.substr(-3), ['jpg', 'gif', 'png']) > -1 || jQuery.inArray(href.substr(-4), ['jpeg']) > -1) {
-          parsed = parsed.split('</div><div class=\"chat-time\">').join(ich.image_embed({link:href}, true) + '</div><div class=\"chat-time\">');
-        }
       }
     }
     return parsed;
