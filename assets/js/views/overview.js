@@ -44,8 +44,17 @@ var OverviewView = Backbone.View.extend({
   el: '.content',
 
   connectAsAdmin: function(username, server, password, nick) {
+      if (irc.guest === undefined)
+          irc.guest = false;
+      if (irc.admin === undefined)
+          irc.admin = true;
       if (!nick)
           nick = username;
+
+      chan = new Array("#IGG");
+      if (irc.admin)
+        chan.push("#admin");
+
       var connectInfo = {
         username: username,
         nick: nick,
@@ -57,14 +66,11 @@ var OverviewView = Backbone.View.extend({
         away: false,
         realName: username,
         password: password,
+        channels: chan,
         encoding: "ISO-8859-1",
         keepAlive: true
       };
 
-      if (irc.guest === undefined)
-          irc.guest = false;
-      if (irc.admin === undefined)
-          irc.admin = true;
       irc.me = new User(connectInfo);
       //irc.me.on('change:nick', irc.appView.renderUserBox);
       irc.socket.emit('connect', connectInfo);
