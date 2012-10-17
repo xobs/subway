@@ -157,10 +157,10 @@ script(id="action", type="text/html")
     span {{renderedTime}}
 
 script(id="message", type="text/html")
-  .chat-name
-    b {{user}}
-  div(class="chat-message {{type}}")
-    span {{content}}
+  div(class="chat-message-block {{type}}")
+    span.chat-name {{user}}
+    > 
+    span(class="chat-message {{type}}") {{content}}
 
 script(id="join_part", type="text/html")
   span(class="{{type}}_img")
