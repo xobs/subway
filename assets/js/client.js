@@ -203,7 +203,6 @@ $(function() {
 
   irc.socket.on('join', function(data) {
     var chanName = data.channel.toLowerCase();
-    console.log('Join event received for ' + chanName + ' - ' + data.nick);
     if (data.nick === irc.me.get('nick')) {
       irc.chatWindows.add({name: chanName});
       irc.socket.emit('getOldMessages',{channelName: chanName, skip:0, amount: 50});
@@ -220,17 +219,12 @@ $(function() {
     if (irc.admin) {
       ni = irc.me.get('nick');
       ne = ni.slice(0, -4);
-      console.log("Changing from " + ni + " to " + ne);
       irc.socket.emit('nick', {nick : ne});
-    }
-    else {
-      console.log("Not an admin");
     }
   });
 
   irc.socket.on('part', function(data) {
     var chanName = data.channel.toLowerCase();
-    console.log('Part event received for ' + chanName + ' - ' + data.nick);
     var channel = irc.chatWindows.getByName(chanName);
     if (data.nick === irc.me.get('nick')) {
       channel.part();
