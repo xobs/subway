@@ -302,7 +302,7 @@ html { overflow: hidden; }
 }
 
 #input-container .input input{
-  width: 270px;
+  width: 200px;
   margin-right: 2%;
   float: left;
   margin-left: 2%;
