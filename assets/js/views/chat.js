@@ -112,7 +112,6 @@ var ChatView = Backbone.View.extend({
               irc.commands.handle(commandText);
             } else {
               // Send the message
-              console.log(irc.chatWindows.getActive().get('name'));
               irc.socket.emit('say', {target: irc.chatWindows.getActive().get('name'), message:message});
             }
             $(this).val('');
