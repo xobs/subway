@@ -1,7 +1,7 @@
 var OverviewView = Backbone.View.extend({
   initialize: function() {
     //console.log("connectOnLoad()");
-    this.render();
+    this.connectAsRandomGuest();
   },
 
   events: {
@@ -18,7 +18,7 @@ var OverviewView = Backbone.View.extend({
   connectAsUser: function(username, server) {
       var connectInfo = {
         nick: username,
-        server: server?server:"xoblo.gs",
+        server: server?server:"localhost",
         port: 6667,
         secure: false,
         selfSigned: false,
@@ -30,9 +30,17 @@ var OverviewView = Backbone.View.extend({
         keepAlive: true
       };
 
+      if (irc.guest === undefined)
+          irc.guest = false;
       irc.me = new User(connectInfo);
       //irc.me.on('change:nick', irc.appView.renderUserBox);
       irc.socket.emit('connect', connectInfo);
+  },
+
+  connectAsRandomGuest: function(server) {
+      username = "guest" + Math.round(Math.random()*131072+10000);
+      irc.guest = true;
+      return this.connectAsUser(username, server);
   },
 
   render: function(event) {
@@ -81,7 +89,7 @@ var OverviewView = Backbone.View.extend({
     encoding = $('#connect-encoding').val(),
     keepAlive = false;
     
-    server = "xoblo.gs";
+    server = "localhost";
     realName = nick;
     if (!server) {
       $('#connect-server').closest('.control-group').addClass('error');

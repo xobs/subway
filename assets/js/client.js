@@ -252,8 +252,13 @@ $(function() {
   });
 
   irc.socket.on('nick', function(data) {
-    if (data.oldNick === irc.me.get('nick'))
+    if (data.oldNick === irc.me.get('nick')) {
       irc.me.set('nick', data.newNick);
+      if (data.newNick.slice(0,5) !== "guest") {
+        window.irc.guest = false;
+        window.irc.chatWindows.getByName('#igg').view.render();
+      }
+    }
 
     var channel = irc.chatWindows.getByName(data.channels[0]);
     var user = channel.userList.getByNick(data.oldNick);

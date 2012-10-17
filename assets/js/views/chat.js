@@ -31,7 +31,15 @@ var ChatView = Backbone.View.extend({
     this.handleInput();
     this.handleScroll();
     this.handleClick();
-    $('#chat-input').focus();
+
+    if(this.model.get('name') !== 'status') {
+      if (irc.guest)
+        $('#chat-input').attr('placeholder', 'Set Nickname');
+      else
+        $('#chat-input').attr('placeholder', null);
+      $('#chat-input').attr('disabled', null);
+      $('#chat-input').focus();
+    }
     return this;
   },
 
@@ -73,6 +81,10 @@ var ChatView = Backbone.View.extend({
         if ($(this).val().length) {
           if (keydownEnter && event.keyCode === 13) {
             var message = $(this).val();
+            // Handle 'set name' case
+            if (irc.guest)
+                message = "/nick " + message;
+
             // Handle IRC commands
             if (message.substr(0, 1) === '/') {
               var commandText = message.substr(1).split(' ');
