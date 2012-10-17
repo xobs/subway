@@ -43,7 +43,7 @@ var OverviewView = Backbone.View.extend({
       var connectInfo = {
         username: username,
         nick: nick,
-        server: server?server:"localhost",
+        server: server?server:"chat.iggmarathon.com",
         port: 6667,
         secure: false,
         selfSigned: false,
@@ -121,7 +121,7 @@ var OverviewView = Backbone.View.extend({
     encoding = $('#connect-encoding').val(),
     keepAlive = false;
     
-    server = "localhost";
+    server = "chat.iggmarathon.com";
     realName = nick;
     if (!server) {
       $('#connect-server').closest('.control-group').addClass('error');
