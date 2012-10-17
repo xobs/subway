@@ -402,7 +402,7 @@ html { overflow: hidden; }
   display: table-cell;
   width: 290px;
   padding: 1% 0% 1% 2%;
-  border-right: 1px solid #DDDDDD;
+  /*border-right: 1px solid #DDDDDD;*/
 }
 
 .chat-time {
