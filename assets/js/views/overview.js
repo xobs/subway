@@ -2,14 +2,16 @@ var OverviewView = Backbone.View.extend({
   initialize: function() {
     var username;
     var password;
-    args = window.location.search.split("?")[1].split("&");
-    for (i=0; i<args.length; i++) {
-      arg = args[i].split("=");
-      if (arg[0] === 'u') {
-        username = arg[1];
-      }
-      else if (arg[0] === 'p') {
-        password = arg[1];
+    if (window.location.search && window.location.search.indexOf("?")>=0) {
+      args = window.location.search.split("?")[1].split("&");
+      for (i=0; i<args.length; i++) {
+        arg = args[i].split("=");
+        if (arg[0] === 'u') {
+          username = arg[1];
+        }
+        else if (arg[0] === 'p') {
+          password = arg[1];
+        }
       }
     }
 
