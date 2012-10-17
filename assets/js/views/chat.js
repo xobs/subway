@@ -15,8 +15,9 @@ var ChatView = Backbone.View.extend({
 
   updateTitle: function(channel) {
     var topic = this.model.get('topic') || '';
+    var title = this.model.get('title') || this.model.get('name');
     var context = {
-      title: this.model.get('name'),
+      title: title,
       topic: utils.linkify(topic)
     };
     this.$('#chat-bar').html(ich.titlebar(context));

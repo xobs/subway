@@ -138,7 +138,7 @@ $(function() {
     if(status === undefined){
       irc.connected = true;
       irc.appView.render();
-      irc.chatWindows.add({name: 'status', type: 'status'});
+      irc.chatWindows.add({name: 'status', type: 'status', title: 'IGG', topic: 'Connecting...'});
       status = irc.chatWindows.getByName('status');
     }
     var sender = (data.nick !== undefined) ? data.nick : 'notice';
