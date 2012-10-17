@@ -266,6 +266,8 @@ $(function() {
       if (data.newNick.slice(0,5) !== "guest") {
         window.irc.guest = false;
         window.irc.chatWindows.getByName('#igg').view.render();
+        $('#chat-button').html("Send");
+        $('#chat-input').attr('placeholder', null);
       }
     }
 

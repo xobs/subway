@@ -95,9 +95,12 @@ script(id="chat", type="text/html")
       #chat-bar.bar
       #chat-contents.bar
       #input-container.bar
-        .input
-          input(id="chat-input", disabled='disabled')
+        .input#chat-input-pleasewait(class="window_title") Connecting...
+        .input#chat-input-type(style="display:none")
+          input(id="chat-input", disabled="disabled")
           a(id="chat-button", class="btn disabled") Send
+        .input#chat-input-nick(style="display:none")
+          a(id="nick-button", class="btn") Join the conversation!
 
 script(id="channel", type="text/html")
   span(class="channel-name") {{name}}

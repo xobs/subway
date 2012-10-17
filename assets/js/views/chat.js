@@ -33,10 +33,25 @@ var ChatView = Backbone.View.extend({
     this.handleClick();
 
     if(this.model.get('name') !== 'status') {
-      if (irc.guest)
-        $('#chat-input').attr('placeholder', 'Nickname');
-      else
-        $('#chat-input').attr('placeholder', null);
+      // Hide the "Please wait..." message
+      $('#chat-input-pleasewait').attr('style', 'display:none;');
+
+      // If they're signed in as a guest, show the "Join the conversation!"
+      // button.
+      if (irc.guest) {
+        $('#chat-input-nick').attr('style', '');
+        $('#nick-button').click( function(){
+          $('#chat-input-nick').attr('style', 'display:none;');
+          $('#chat-input-type').attr('style', '');
+          $('#chat-input').attr('placeholder', "Set Nickname");
+          $('#chat-button').html("Join");
+        });
+      }
+
+      // Otherwise, show the input box.
+      else {
+        $('#chat-input-type').attr('style', '');
+      }
       $('#chat-input').attr('disabled', null);
       $('#chat-input').focus();
     }
@@ -46,11 +61,16 @@ var ChatView = Backbone.View.extend({
   handleInput: function() {
     $('#chat-button').click( function(){
       var message = $('#chat-input').val();
-      if (message.substr(0, 1) === '/') {
-        var commandText = message.substr(1).split(' ');
-        irc.commands.handle(commandText);
-      } else {
-        irc.socket.emit('say', {target: irc.chatWindows.getActive().get('name'), message:message});
+      if (message.length) {
+        // Handle 'set name' case
+        if (irc.guest)
+          message = "/nick " + message;
+        if (message.substr(0, 1) === '/') {
+          var commandText = message.substr(1).split(' ');
+          irc.commands.handle(commandText);
+        } else {
+          irc.socket.emit('say', {target: irc.chatWindows.getActive().get('name'), message:message});
+        }
       }
       $('#chat-input').val('');
     });
