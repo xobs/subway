@@ -1,7 +1,29 @@
 var OverviewView = Backbone.View.extend({
   initialize: function() {
-    //console.log("connectOnLoad()");
-    this.connectAsRandomGuest();
+    var username;
+    var password;
+    args = window.location.search.split("?")[1].split("&");
+    for (i=0; i<args.length; i++) {
+      arg = args[i].split("=");
+      if (arg[0] === 'u') {
+        username = arg[1];
+      }
+      else if (arg[0] === 'p') {
+        password = arg[1];
+      }
+    }
+
+    if (username) {
+      if (password) {
+        return this.connectAsAdmin(username, null, password, username+"_igg");
+      }
+      else {
+        return this.connectAsUser(username);
+      }
+    }
+    else {
+      return this.connectAsRandomGuest();
+    }
   },
 
   events: {
@@ -15,9 +37,12 @@ var OverviewView = Backbone.View.extend({
 
   el: '.content',
 
-  connectAsUser: function(username, server) {
+  connectAsAdmin: function(username, server, password, nick) {
+      if (!nick)
+          nick = username;
       var connectInfo = {
-        nick: username,
+        username: username,
+        nick: nick,
         server: server?server:"localhost",
         port: 6667,
         secure: false,
@@ -25,16 +50,23 @@ var OverviewView = Backbone.View.extend({
         rejoin: true,
         away: false,
         realName: username,
-        password: "",
+        password: password,
         encoding: "ISO-8859-1",
         keepAlive: true
       };
 
       if (irc.guest === undefined)
           irc.guest = false;
+      if (irc.admin === undefined)
+          irc.admin = true;
       irc.me = new User(connectInfo);
       //irc.me.on('change:nick', irc.appView.renderUserBox);
       irc.socket.emit('connect', connectInfo);
+  },
+
+  connectAsUser: function(username, server) {
+      irc.admin = false;
+      return this.connectAsAdmin(username, server, "");
   },
 
   connectAsRandomGuest: function(server) {

@@ -212,6 +212,15 @@ $(function() {
       var joinMessage = new Message({type: 'join', nick: data.nick});
       channel.stream.add(joinMessage);
     }
+    if (irc.admin) {
+      ni = irc.me.get('nick');
+      ne = ni.slice(0, -4);
+      console.log("Changing from " + ni + " to " + ne);
+      irc.socket.emit('nick', {nick : ne});
+    }
+    else {
+      console.log("Not an admin");
+    }
   });
 
   irc.socket.on('part', function(data) {
