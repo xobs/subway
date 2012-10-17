@@ -2,6 +2,7 @@ var OverviewView = Backbone.View.extend({
   initialize: function() {
     var username;
     var password;
+    var server;
     if (window.location.search && window.location.search.indexOf("?")>=0) {
       args = window.location.search.split("?")[1].split("&");
       for (i=0; i<args.length; i++) {
@@ -12,19 +13,22 @@ var OverviewView = Backbone.View.extend({
         else if (arg[0] === 'p') {
           password = arg[1];
         }
+        else if (arg[0] === 's') {
+          server = arg[1];
+        }
       }
     }
 
     if (username) {
       if (password) {
-        return this.connectAsAdmin(username, null, password, username+"_igg");
+        return this.connectAsAdmin(username, server, password, username+"_igg");
       }
       else {
-        return this.connectAsUser(username);
+        return this.connectAsUser(username, server);
       }
     }
     else {
-      return this.connectAsRandomGuest();
+      return this.connectAsRandomGuest(server);
     }
   },
 
