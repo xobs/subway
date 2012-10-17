@@ -296,6 +296,12 @@ $(function() {
       return;
     if (data.message.args.join().indexOf("PASS,Not enough parameters") >= 0)
       return;
+    if (data.message.args.join().indexOf("Erroneous Nickname") >= 0) {
+      var window = irc.chatWindows.getByName('#igg');
+      if (window)
+        window.stream.add({sender: 'server', raw: "Invalid name", type: 'notice'});
+      return;
+    }
     var window = irc.chatWindows.getByName('status');
     if(window === undefined){
       irc.connected = true;
