@@ -390,7 +390,7 @@ html { overflow: hidden; }
 }
 
 #nick-button {
-    padding-left: 50px;
+    margin-left: 50px;
 }
 
 .mention{
