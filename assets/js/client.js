@@ -143,13 +143,13 @@ $(function() {
     }
     var sender = (data.nick !== undefined) ? data.nick : 'notice';
     console.log(status);
-    status.stream.add({sender: sender, raw: data.text, type: 'notice'});
+    //status.stream.add({sender: sender, raw: data.text, type: 'notice'});
   });
 
   // Message of the Day
   irc.socket.on('motd', function(data) {
     var message = new Message({sender: 'status', raw: data.motd, type: 'motd'});
-    irc.chatWindows.getByName('status').stream.add(message);
+    //irc.chatWindows.getByName('status').stream.add(message);
   });
 
   // Whois data
@@ -183,6 +183,11 @@ $(function() {
       // Handle PMs intiated by me
       chatWindow.stream.add({sender: data.from.toLowerCase(), raw: data.text, type: 'pm'});
     }
+  });
+
+  irc.socket.on('action', function(data) {
+    var chatWindow = irc.chatWindows.getByName(data.to.toLowerCase());
+    chatWindow.stream.add({sender: data.from, raw: data.text, type: 'message'});
   });
 
   irc.socket.on('pm', function(data) {
@@ -292,6 +297,11 @@ $(function() {
   });
 
   irc.socket.on('error', function(data) {
+    /* Our server generates these errors on login.  Ignore them. */
+    if (data.message.args.join().indexOf("Register first") >= 0)
+      return;
+    if (data.message.args.join().indexOf("PASS,Not enough parameters") >= 0)
+      return;
     var window = irc.chatWindows.getByName('status');
     if(window === undefined){
       irc.connected = true;
