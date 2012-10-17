@@ -34,7 +34,7 @@ var ChatView = Backbone.View.extend({
 
     if(this.model.get('name') !== 'status') {
       if (irc.guest)
-        $('#chat-input').attr('placeholder', 'Set Nickname');
+        $('#chat-input').attr('placeholder', 'Nickname');
       else
         $('#chat-input').attr('placeholder', null);
       $('#chat-input').attr('disabled', null);
