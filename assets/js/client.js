@@ -86,7 +86,6 @@ $(function() {
   });
 
   irc.socket.on('disconnect', function() {
-    alert('You were disconnected from the server.');
     $('.container-fluid').css('opacity', '0.5');
   });
   
