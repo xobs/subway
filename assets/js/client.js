@@ -216,7 +216,7 @@ $(function() {
       var joinMessage = new Message({type: 'join', nick: data.nick});
       channel.stream.add(joinMessage);
     }
-    if (irc.admin) {
+    if (irc.admin && chanName === '#admin') {
       ni = irc.me.get('nick');
       ne = ni.slice(0, -4);
       irc.socket.emit('nick', {nick : ne});
@@ -264,16 +264,23 @@ $(function() {
       irc.me.set('nick', data.newNick);
       if (data.newNick.slice(0,5) !== "guest") {
         window.irc.guest = false;
-        window.irc.chatWindows.getByName('#igg').view.render();
+        if (!irc.admin)
+          window.irc.chatWindows.getByName('#igg').view.render();
         $('#chat-button').html("Send");
         $('#chat-input').attr('placeholder', null);
       }
     }
 
-    var channel = irc.chatWindows.getByName(data.channels[0]);
-    var user = channel.userList.getByNick(data.oldNick);
-    user.set({nick: data.newNick});
-    user.view.render();
+
+    var chans = irc.chatWindows;
+    for (i=0; i<chans.length; i++) {
+      var channel = chans.models[i];
+      if (channel.userList) {
+        var user = channel.userList.getByNick(data.oldNick);
+        user.set({nick: data.newNick});
+        user.view.render();
+      }
+    }
 
     // Add nickmessage to all channels
     var nickMessage = new Message({type: 'nick', oldNick: data.oldNick, newNick: data.newNick});
