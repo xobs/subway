@@ -33,7 +33,17 @@ var ChatView = Backbone.View.extend({
     this.handleScroll();
     this.handleClick();
 
+
     if(this.model.get('name') !== 'status') {
+      if (irc.admin) {
+        $('#channels-bar').html(ich.admin_buttons());
+        $('#chan-igg').click( function(){
+          irc.chatWindows.setActive(irc.chatWindows.getByName("#igg"));
+        });
+        $('#chan-admin').click( function(){
+          irc.chatWindows.setActive(irc.chatWindows.getByName("#admin"));
+        });
+      }
       // Hide the "Please wait..." message
       $('#chat-input-pleasewait').attr('style', 'display:none;');
 

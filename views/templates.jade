@@ -11,74 +11,6 @@ script(id="overview_home", type="text/html")
       input#connect-nick(type="text")
     a(id="connect-button", class="btn btn-primary spacing-right", type="button") Connect
 
-script(id="overview", type="text/html")
-  #overview
-
-script(id="overview_connection", type="text/html")
-  #home_parent
-    a.overview_button#home Home
-  form.form-inline
-    .control-group
-      label(for="connect-nick") Nick
-      input#connect-nick(type="text")
-    .control-group
-      label(for="connect-server") Server
-      input#connect-server(type="text")
-    .control-group
-      label(for="connect-password") Password (optional)
-      input#connect-password(type="password")
-    .control-group
-      label(for="connect-realName") Real Name
-      input#connect-realName(type="text")
-    .connect-more-options.hide
-      .control-group
-        label(for="connect-port") Port
-        input#connect-port.input-small(type="text", placeholder="6667")
-      .control-group
-        label(for="connect-secure") SSL
-        input#connect-secure(type="checkbox")
-      .control-group#ssl-self-signed
-        label(for="connect-selfSigned") Self-signed SSL Cert
-        input#connect-selfSigned(type="checkbox")
-      .control-group
-        label(for="connect-away") Away Message
-        input#connect-away(type="text", placeholder="AFK")
-      .control-group
-        label(for="connect-rejoin") Bouncer Mode
-        input#connect-rejoin(type="checkbox")
-      .control-group
-        label(for="connect-encoding") Encoding
-        select#connect-encoding
-          option(value="", selected="selected") UTF-8
-          option(disabled="disabled") --------------
-          option(value="ISO-8859-1") ISO-8859-1
-          option(value="ISO-8859-15") ISO-8859-15
-          option(value="ISO-8859-2") ISO-8859-2
-          option(value="ISO-8859-7") ISO-8859-7 (Greek)
-          option(value="ISO-8859-8") ISO-8859-8 (Hebrew)
-          option(value="ISO-8859-9") ISO-8859-9 (Turkish)
-          option(value="ISO-8859-11") ISO-8859-11 (Thai)
-          option(disabled="disabled") --------------
-          option(value="ISO-2022-JP") ISO-2022-JP (Japanese)
-          option(value="CP949") CP949 (Korean)
-          option(value="EUC-KR") EUC-KR (Korean)
-          option(value="GBK") GBK (Chinese)
-          option(value="GB18030") GB18030 (Chinese)
-          option(value="BIG5") BIG5 (Chinese)
-          option(disabled="disabled") --------------
-          option(value="KOI8-U") KOI8-U (Ukrainian)
-          option(value="KOI8-R") KOI8-R (Cyrillic)
-          option(value="CP1251") CP1251 (Cyrillic)
-          option(value="CP1256") CP1256 (Arabic)
-          option(value="CP1257") CP1257 (baltic)
-    .control-group
-      {{#loggedIn}}
-      label.checkbox(for="connect-keep-alive", style="width:100%") Keep connection alive after browser closed
-        input#connect-keep-alive(type="checkbox")
-      {{/loggedIn}}
-    a(id="connect-button", class="btn btn-primary spacing-right", type="button") Connect
-    a(id="connect-more-options-button", class="btn", type="button") More Options
-
 script(id="overview_settings", type="text/html")
   #home_parent
     a.overview_button#home Home
@@ -101,6 +33,7 @@ script(id="chat", type="text/html")
           a(id="chat-button", class="btn disabled") Send
         .input#chat-input-nick(style="display:none")
           a(id="nick-button", class="btn") Join the conversation!
+      #channels-bar.bar
 
 script(id="channel", type="text/html")
   span(class="channel-name") {{name}}
@@ -152,3 +85,7 @@ script(id="alert", type="text/html")
   .alert(class = "{{type}}")
     a(class="close", data-dismiss="alert", href="#") &times;
     {{content}}
+
+script(id="admin_buttons", type="text/html")
+  a(id="chan-igg", class="btn") #IGG
+  a(id="chan-admin", class="btn") #Admin

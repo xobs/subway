@@ -297,6 +297,11 @@ html { overflow: hidden; }
   border-right: 1px solid #DDDDDD;
 }
 
+#channels-bar {
+  position: absolute;
+  top: 415px;
+}
+
 #input-container .input{
   padding-top: 10px;
 }
