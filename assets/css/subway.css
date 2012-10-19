@@ -332,6 +332,10 @@ html { overflow: hidden; }
   background: #e9d8f1;
 }
 
+.message-op {
+  background: #c9b8d1;
+}
+
 .message_notification{
   padding: 1% 0% 1% 1%;
 }

@@ -189,6 +189,7 @@ var ChatView = Backbone.View.extend({
     var view = new MessageView({model: msg});
     var sender = msg.get('sender');
     var type = msg.get('type');
+    var role = msg.get('role');
 
     var nicksToIgnore = ['', 'notice', 'status'];
 
@@ -205,6 +206,8 @@ var ChatView = Backbone.View.extend({
     if (sender === irc.me.get('nick') && ['message', 'pm'].indexOf(type) !== -1) {
       $(view.el).addClass('message-me');
     }
+    if (role === "admin")
+      $(view.el).addClass('message-op');
 
     if(['join', 'part', 'topic', 'nick', 'quit'].indexOf(type) !== -1){
       $(view.el).addClass('message_notification');

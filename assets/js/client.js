@@ -176,7 +176,11 @@ $(function() {
     var type = 'message';
     // Only handle channel messages here; PMs handled separately
     if (data.to.substr(0, 1) === '#') {
-      chatWindow.stream.add({sender: data.from, raw: data.text, type: type});
+      var role = "user";
+      fromUser = chatWindow.userList.getByNick(data.from);
+      if (fromUser && fromUser.get("role").indexOf("@") >= 0)
+        role = "admin";
+      chatWindow.stream.add({sender: data.from, raw: data.text, type: type, role: role});
     } else if(data.to !== irc.me.get('nick')) {
       // Handle PMs intiated by me
       chatWindow.stream.add({sender: data.from.toLowerCase(), raw: data.text, type: 'pm'});
