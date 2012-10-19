@@ -44,14 +44,6 @@ $(function() {
 
   // EVENTS //
 
-  // **TODO**: is there a better place for this to go?
-  /*
-  $(window).bind('beforeunload', function() {
-    if(!window.irc.connected || window.irc.loggedIn) { return null; }
-    return "If you leave, you'll be signed out of Subway.";
-  });
-  */
-
   irc.socket.emit('getDatabaseState', {});
 
   irc.socket.on('databaseState', function(data) {
@@ -62,6 +54,7 @@ $(function() {
 
   // Registration (server joined)
   irc.socket.on('registered', function(data) {
+    $('.container-fluid').css('opacity', '1.0');
     var window = irc.chatWindows.getByName('status');
     irc.socket.emit('getNick', {});
     irc.connected = true;
@@ -87,6 +80,12 @@ $(function() {
 
   irc.socket.on('disconnect', function() {
     $('.container-fluid').css('opacity', '0.5');
+    console.log("Disconnected.  Queueing reconnect...");
+    setTimeout(function() {
+      console.log("Attempting reconnect...");
+      window.irc.socket = io.connect(null, {port: PORT}),
+      window.irc.socket.emit('connect', window.connect_info);
+    }, 5000);
   });
   
 
@@ -307,6 +306,10 @@ $(function() {
     if (data.message.args.join().indexOf("Register first") >= 0)
       return;
     if (data.message.args.join().indexOf("PASS,Not enough parameters") >= 0)
+      return;
+    if (data.message.args.join().indexOf("PASS,Syntax error") >= 0)
+      return;
+    if (data.message.args.join().indexOf("Connection not registered") >= 0)
       return;
     if (data.message.args.join().indexOf("Erroneous Nickname") >= 0) {
       var window = irc.chatWindows.getByName('#igg');
