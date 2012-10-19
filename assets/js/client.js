@@ -460,12 +460,8 @@ $(function() {
   });
 
   irc.commands.add('topic', function(args){
-    if (args[1]) {
-      irc.socket.emit('topic', {name: args[0], topic: args[1]});
-    } else {
-      irc.socket.emit('topic', {name: irc.chatWindows.getActive().get('name'),
-        topic: args[0]});
-    }
+    irc.socket.emit('topic', {name: irc.chatWindows.getActive().get('name'),
+        topic: args.join(' ')});
   });
 
   irc.commands.add('whois', function(args){
