@@ -21,7 +21,7 @@ var OverviewView = Backbone.View.extend({
 
     if (username) {
       if (password) {
-        return this.connectAsAdmin(username, server, password, username+"_igg");
+        return this.connectAsAdmin(username, server, password, username);
       }
       else {
         return this.connectAsUser(username, server);

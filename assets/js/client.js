@@ -216,11 +216,6 @@ $(function() {
         channel.stream.add(joinMessage);
       }
     }
-    if (irc.admin && chanName === '#admin') {
-      ni = irc.me.get('nick');
-      ne = ni.slice(0, -4);
-      irc.socket.emit('nick', {nick : ne});
-    }
   });
 
   irc.socket.on('part', function(data) {
