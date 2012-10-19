@@ -391,6 +391,17 @@ html { overflow: hidden; }
     padding-left: 20px;
 }
 
+input::-webkit-input-placeholder {
+    color: red;
+}
+input:-moz-placeholder {
+    color: red;
+}
+input:-ms-input-placeholder {
+    color: red;
+}
+
+
 .chat-message .embed img{
   display: block;
   max-width: 100%;

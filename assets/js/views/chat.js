@@ -54,7 +54,7 @@ var ChatView = Backbone.View.extend({
         $('#nick-button').click( function(){
           $('#chat-input-nick').attr('style', 'display:none;');
           $('#chat-input-type').attr('style', '');
-          $('#chat-input').attr('placeholder', "Set Nickname");
+          $('#chat-input').attr('placeholder', "Choose nickname");
           $('#chat-input').focus();
           $('#chat-button').html("Join");
         });
