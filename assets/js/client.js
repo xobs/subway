@@ -212,8 +212,10 @@ $(function() {
         channel = irc.chatWindows.getByName(chanName);
       }
       channel.userList.add({nick: data.nick, role: data.role, idle:0, user_status: 'idle', activity: ''});
-      var joinMessage = new Message({type: 'join', nick: data.nick});
-      channel.stream.add(joinMessage);
+      if (data.nick.slice(0,5) !== "guest") {
+        var joinMessage = new Message({type: 'join', nick: data.nick});
+        channel.stream.add(joinMessage);
+      }
     }
     if (irc.admin && chanName === '#admin') {
       ni = irc.me.get('nick');
@@ -231,8 +233,10 @@ $(function() {
       var user = channel.userList.getByNick(data.nick);
       user.view.remove();
       user.destroy();
-      var partMessage = new Message({type: 'part', nick: data.nick});
-      channel.stream.add(partMessage);
+      if (data.nick.slice(0,5) !== "guest") {
+        var partMessage = new Message({type: 'part', nick: data.nick});
+        channel.stream.add(partMessage);
+      }
     }
   });
 
@@ -244,8 +248,10 @@ $(function() {
         user = channel.userList.getByNick(data.nick);
         user.view.remove();
         user.destroy();
-        quitMessage = new Message({type: 'quit', nick: data.nick, reason: data.reason, message: data.message});
-        channel.stream.add(quitMessage);
+        if (data.nick.slice(0,5) !== "guest") {
+          quitMessage = new Message({type: 'quit', nick: data.nick, reason: data.reason, message: data.message});
+          channel.stream.add(quitMessage);
+        }
       }
     }
   });
